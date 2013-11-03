@@ -16,7 +16,7 @@ access_token = OAuth::Token.new(
 # returns a list of public Tweets from the specified
 # account.
 baseurl = "https://api.twitter.com"
-path    = "/1.1/statuses/followers.json"
+path    = "/1.1/followers/ids.json"
 query   = URI.encode_www_form(
     "screen_name" => "DrewWeth",
     "count" => 10,
@@ -27,12 +27,10 @@ request = Net::HTTP::Get.new address.request_uri
 
 
 # Parse a response from the API and return a user object.
-def print_tweet(tweets)
+def print_tweet(users)
   # ADD CODE TO ITERATE THROUGH EACH TWEET AND PRINT ITS TEXT
-    tweets.each do |tweet|
-
-        puts tweet["text"]
-        puts "\n"  
+    users.each do |user| 
+    	puts user
     end
 end
 
@@ -50,10 +48,17 @@ response = http.request request
 
 
 # Parse and print the Tweet if the response code was 200
-tweet = nil
+
+following = {}
+
+users = nil
 if response.code == '200' then
-  tweet = JSON.parse(response.body)
-  print_tweet(tweet)
+    users = JSON.parse(response.body)
+    following = Array.new(users.length, false)
+    users.each |user| do
+  	    following << user
+    end
+    print_tweet(following)
 else 
 	puts "getting 404"
 end 
