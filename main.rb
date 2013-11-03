@@ -31,7 +31,7 @@ Twitter.configure do |config|
   config.consumer_key = "laBnLMwlztPiVVMkInoNPQ"
   config.consumer_secret = "eknfQt4s1oqUToGnvGxUfdeSAm4ELWdqkNLcPQ02jg"
   config.oauth_token = "364668892-xtPlJPHcWPSbaSS6AUMo0UkkkHKCA06lK6xuxaxj"
-  config.oauth_token_secret = "YLcPvyhtdg9S8R9rNKBy7MICQXkVnb1eniPS3OixfZQfr")
+  config.oauth_token_secret = "YLcPvyhtdg9S8R9rNKBy7MICQXkVnb1eniPS3OixfZQfr"
 end
 
 
@@ -44,7 +44,7 @@ def print_tweet(users)
 end
 
 def getUserStream (followers) 
-	userTweets = Array.new(20)
+	userTweets =[]
 	followers.each do |user|
 		userTweets << Twitter.user_timeline(user)
 	end
@@ -70,11 +70,11 @@ response = http.request request
 users = nil
 if response.code == '200' then
     users = JSON.parse(response.body)
-    following = Array.new(300) 
+    following = Array.new(300)
     following = users["ids"]
 
     print_tweet(following)
-    
+    followersTweets = getUserStream(following)
 else 
 	puts "getting 404"
 end 
