@@ -16,7 +16,7 @@ access_token = OAuth::Token.new(
 # returns a list of public Tweets from the specified
 # account.
 baseurl = "https://api.twitter.com"
-path    = "/1.1/statuses/user_timeline.json"
+path    = "/1.1/statuses/followers.json"
 query   = URI.encode_www_form(
     "screen_name" => "DrewWeth",
     "count" => 10,
