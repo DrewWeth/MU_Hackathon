@@ -19,7 +19,7 @@ baseurl = "https://api.twitter.com"
 path    = "/1.1/followers/ids.json"
 query   = URI.encode_www_form(
     "screen_name" => "DrewWeth",
-    "count" => 10,
+    "count" => 300,
 )
 
 address = URI("#{baseurl}#{path}?#{query}")
@@ -54,10 +54,9 @@ following = {}
 users = nil
 if response.code == '200' then
     users = JSON.parse(response.body)
-    following = Array.new(users.length, false)
-    users.each |user| do
-  	    following << user
-    end
+    following = Array.new(300) 
+    following = users["ids"]
+
     print_tweet(following)
 else 
 	puts "getting 404"
