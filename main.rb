@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'oauth'
 require 'json'
+require 'twitter'
 
 # Change the following values to those provided on dev.twitter.com
 # The consumer key identifies the application making the request.
@@ -26,6 +27,14 @@ address = URI("#{baseurl}#{path}?#{query}")
 request = Net::HTTP::Get.new address.request_uri
 
 
+Twitter.configure do |config|
+  config.consumer_key = "laBnLMwlztPiVVMkInoNPQ"
+  config.consumer_secret = "eknfQt4s1oqUToGnvGxUfdeSAm4ELWdqkNLcPQ02jg"
+  config.oauth_token = "364668892-xtPlJPHcWPSbaSS6AUMo0UkkkHKCA06lK6xuxaxj"
+  config.oauth_token_secret = "YLcPvyhtdg9S8R9rNKBy7MICQXkVnb1eniPS3OixfZQfr")
+end
+
+
 # Parse a response from the API and return a user object.
 def print_tweet(users)
   # ADD CODE TO ITERATE THROUGH EACH TWEET AND PRINT ITS TEXT
@@ -33,6 +42,16 @@ def print_tweet(users)
     	puts user
     end
 end
+
+def getUserStream (followers) 
+	userTweets = Array.new(20)
+	followers.each do |user|
+		userTweets << Twitter.user_timeline(user)
+	end
+	userTweets
+end
+
+
 
 
 # Set up Net::HTTP to use SSL, which is required by Twitter.
@@ -46,10 +65,7 @@ request.oauth! http, consumer_key, access_token
 http.start
 response = http.request request
 
-
 # Parse and print the Tweet if the response code was 200
-
-following = {}
 
 users = nil
 if response.code == '200' then
@@ -58,6 +74,7 @@ if response.code == '200' then
     following = users["ids"]
 
     print_tweet(following)
+    
 else 
 	puts "getting 404"
 end 
