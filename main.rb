@@ -28,8 +28,14 @@ def getUserStream (followers)
 	userTweets
 end
 
-list = client.followers
+list = user.followers
 
 list.each do |user|
+	put user
+end
+=begin
+arrOfUsers=[]
+10.times do |list|
 	arrOfUsers << client.user(user)
 end
+=end
