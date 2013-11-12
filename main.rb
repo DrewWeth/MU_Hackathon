@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'oauth'
 require 'json'
-require 'twitter'
+#require 'twitter'
 require 'sinatra'
 
 def method_name (userName)	
