@@ -102,5 +102,9 @@ post '/' do
 	users = method_name(params[:username])
 	@happy_word = calculate_nice_words(users)
 	@bad_word = calculate_bad_words(users)
+	## return JSON here.
+	#myHash = { :good=> "#{@happy_word}", :bad=> "#{@bad_word}"}
+
+	##return myHash.to_json
 	return "Nice words: #{@happy_word}\nBad words: #{@bad_word}"
 end
