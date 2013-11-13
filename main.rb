@@ -1,4 +1,5 @@
 require 'rubygems'
+
 require 'oauth'
 require 'json'
 #require 'twitter'
@@ -54,6 +55,7 @@ end
 def calculate_nice_words (users)
 	happy_word = Hash.new(0)
 	file_name = "happywords.txt"
+	your_happy_words = []
 	File.open(file_name, "r").each_line do |line|
 		line.strip.split(' ' || '\t').each do |s|
 			happy_word[s] = 1
@@ -65,15 +67,17 @@ def calculate_nice_words (users)
 			# puts s.strip
 			if happy_word[s] == 1 then
 				puts "YAY!!! #{s}"
-				happy_count += 1
+				# happy_count += 1
+				your_happy_words.push(s)
 			end
 		end
 	end
-	happy_count
+	your_happy_words
 end
 
 def calculate_bad_words (users)
 	happy_word = Hash.new(0)
+	your_bad_words =[]
 	file_name = "badwords.txt"
 	File.open(file_name, "r").each_line do |line|
 		line.strip.split(' ' || '\t').each do |s|
@@ -87,11 +91,12 @@ def calculate_bad_words (users)
 			# puts s.strip
 			if happy_word[s] == 1 then
 				puts "WHAT?!?!?! #{s}"
-				happy_count += 1
+				your_bad_words.push(s)
+				# happy_count += 1
 			end
 		end
 	end
-	happy_count
+	your_bad_words
 end
 
 get '/' do
@@ -106,5 +111,5 @@ post '/' do
 	#myHash = { :good=> "#{@happy_word}", :bad=> "#{@bad_word}"}
 
 	##return myHash.to_json
-	return "Nice words: #{@happy_word}\nBad words: #{@bad_word}"
+	return "Nice words: #{@happy_word}\n\nBad words: #{@bad_word}"
 end
