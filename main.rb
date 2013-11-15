@@ -111,5 +111,5 @@ post '/' do
 	#myHash = { :good=> "#{@happy_word}", :bad=> "#{@bad_word}"}
 
 	##return myHash.to_json
-	return "Nice words: #{@happy_word}\n\nBad words: #{@bad_word}"
+	return {:good => happy_word, :bad => bad_word}.to_json
 end
