@@ -99,6 +99,16 @@ def calculate_bad_words (users)
 	your_bad_words
 end
 
+=begin
+def delete_nodes_on_command (users)
+{
+	puts "enter a word displayed to display the tweet"
+	
+	if ()
+}
+=end
+
+
 get '/' do
 	erb :index
 end
