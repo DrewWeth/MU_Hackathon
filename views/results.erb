@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	</head>
+	<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">	
+				<h1>Twitter Public Relation Checker</h1>
+			</div>				
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+			<p>Enter your Twitter handle so I can search up to 4,000 of your tweets to find positive and negative words. Note, this will find curse words, so prepare yourself. Future features include asking if user would like to delete tweets with curse words, confirmation, and tweet deletion.</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>Positive Words</h4>
+				<% @happy_word.each do |word| %>
+				<%= word %>,
+				<%end%>
+			</div>
+			<div class="col-sm-6">
+				<h4>Negative Words</h4>
+				<% @bad_word.each do |word| %>
+				<%= word %>,
+				<% end %>
+			</div>
+		</div>
+	</div>
+</body>
+<footer>
+	<div class="container">
+		<hr>
+		<a href="https://drewweth.herokuapp.com">Drew Wetherington</a>
+		<script type="text/javascript"></script>
+	</div>
+</footer>
+</html>
+
