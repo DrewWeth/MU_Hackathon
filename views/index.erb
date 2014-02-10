@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
 	</head>
 	<body>
-		<h1>Twitter Public Relation Checker</h1>
-		<p>Enter your Twitter handle so I can search up to 4,000 of your tweets to find positive and negative words. Note, this will find curse words, so prepare yourself. Future features include asking if user would like to delete tweets with curse words, confirmation, and tweet deletion.<p>
-		<center><form action="/" method="post">
-			<input name="username" type="text" placeholder="username">
-			<input type="submit" value="go!">
-		</form></center>
-
-		<script type="text/javascript">
-
-		</script>
-
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">	
+				<h1>Twitter Public Relation Checker</h1>
+			</div>				
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+			<p>Enter your Twitter handle so I can search up to 4,000 of your tweets to find positive and negative words. Note, this will find curse words, so prepare yourself. Future features include asking if user would like to delete tweets with curse words, confirmation, and tweet deletion.</p>
+			</div>
+			<div class="col-sm-6">
+				<center><form action="/results/" method="get">
+				<input name="username" type="text" placeholder="username">
+				<input type="submit" value="go!">
+				</form></center>
+			</div>
+			<script type="text/javascript">
+			</script>
+		</div>
+	</div>
 	</body>
 </html>
 
