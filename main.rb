@@ -5,6 +5,22 @@ require 'json'
 #require 'twitter'
 require 'sinatra'
 
+
+class Word
+   def initialize(word, tweet)
+      @word=word
+      @tweet=tweet
+   end
+   # accessor methods
+   def getWord
+      @word
+   end
+
+   def getTweet
+      @tweet
+   end
+end
+
 def method_name (userName)	
 	consumer_key = OAuth::Consumer.new(
     	"laBnLMwlztPiVVMkInoNPQ",
@@ -44,19 +60,16 @@ def method_name (userName)
 	users
 end
 
-# Parse a response from the API and return a user object.
 def print_tweet(users)
-  # ADD CODE TO ITERATE THROUGH EACH TWEET AND PRINT ITS TEXT
-    users.each do |user| 
+ users.each do |user| 
     	puts user["text"]
     end
 end
 
 def calculate_nice_words (users)
-	@happy_tweets = Array.new
 	happy_word = Hash.new(0)
 	file_name = "happywords.txt"
-	your_happy_words = []
+	your_happy_Words = []
 	File.open(file_name, "r").each_line do |line|
 		line.strip.split(' ' || '\t').each do |s|
 			happy_word[s] = 1
@@ -65,23 +78,18 @@ def calculate_nice_words (users)
 	happy_count = 0
 	users.each do |user|
 		user["text"].strip.split(' ').each do |s|
-			# puts s.strip
 			if happy_word[s] == 1 then
-				# puts "YAY!!! #{s}" command line print
-				# @happy_tweets.add(user["text"]) 
- 				# happy_count += 1
-				your_happy_words.push(s)
-				@happy_tweets.push(user["text"])
+				newWordObj= Word.new(s, user["text"])
+				your_happy_Words.push(newWordObj)
 			end
 		end
 	end
-	your_happy_words
+	your_happy_Words
 end
 
 def calculate_bad_words (users)
-	@negative_tweets = Array.new
 	happy_word = Hash.new(0)
-	your_bad_words =[]
+	your_bad_Words =[]
 	file_name = "badwords.txt"
 	File.open(file_name, "r").each_line do |line|
 		line.strip.split(' ' || '\t').each do |s|
@@ -90,29 +98,15 @@ def calculate_bad_words (users)
 	end
 	happy_count = 0
 	users.each do |user|
-		#puts user["text"].strip
 		user["text"].strip.split(' ').each do |s|
-			# puts s.strip
 			if happy_word[s] == 1 then
-				puts "WHAT?!?!?! #{s}"
-				your_bad_words.push(s)
-				@negative_tweets.push(user["text"])
-				# happy_count += 1
+				newWordObj = Word.new(s, user["text"])
+				your_bad_Words.push(newWordObj)
 			end
 		end
 	end
-	your_bad_words
+	your_bad_Words
 end
-
-=begin
-def delete_nodes_on_command (users)
-{
-	puts "enter a word displayed to display the tweet"
-	
-	if ()
-}
-=end
-
 
 get '/' do
 	erb :index
@@ -122,9 +116,6 @@ get '/results/' do
 	users = method_name(params[:username])
 	@happy_word = calculate_nice_words(users)
 	@bad_word = calculate_bad_words(users)
-	## return JSON here.
-	#myHash = { :good=> "#{@happy_word}", :bad=> "#{@bad_word}"}
 	erb :results
-	##return myHash.to_json
-	## return {:good => happy_word, :bad => bad_word}.to_json
 end
+

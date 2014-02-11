@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,17 +26,19 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-12">
 					<h4>Positive Words (<%= @happy_word.size %>)</h4>
-					<% @happy_word.each do |word| %>
-						<div class="label label-info"><%= word %>
+					<% @happy_word.each do |wordObj| %>
+						<%= wordObj.getWord() %>, <div class="label label-info"><%= wordObj.getTweet() %><br>
 						</div>
 					<%end%>
 				</div>
-				<div class="col-sm-6">
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
 					<h4>Negative Words (<%= @bad_word.size %>)</h4>
-					<% @bad_word.each do |word| %>
-						<div class="label label-danger"><%= word %>
+					<% @bad_word.each do |wordObj| %>
+						<%= wordObj.getWord() %>, <div class="label label-danger"><%= wordObj.getTweet() %><br>
 						</div>
 					<% end %>
 				</div>
