@@ -53,6 +53,7 @@ def print_tweet(users)
 end
 
 def calculate_nice_words (users)
+	@happy_tweets = Array.new
 	happy_word = Hash.new(0)
 	file_name = "happywords.txt"
 	your_happy_words = []
@@ -66,8 +67,9 @@ def calculate_nice_words (users)
 		user["text"].strip.split(' ').each do |s|
 			# puts s.strip
 			if happy_word[s] == 1 then
-				puts "YAY!!! #{s}"
-				# happy_count += 1
+				# puts "YAY!!! #{s}" command line print
+				# @happy_tweets.add(user["text"]) 
+ 				# happy_count += 1
 				your_happy_words.push(s)
 			end
 		end

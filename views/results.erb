@@ -14,16 +14,20 @@
 			<div class="col-sm-6">
 			<p>Enter your Twitter handle so I can search up to 4,000 of your tweets to find positive and negative words. Note, this will find curse words, so prepare yourself. Future features include asking if user would like to delete tweets with curse words, confirmation, and tweet deletion.</p>
 			</div>
+			<div class="col-sm-6">
+				<p>
+					<h4>Current Selected Tweet</h4>
+				</p>
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
-				<h4>Positive Words</h4>
+				<h4>Positive Words (<%= @happy_word.size %>)</h4>
 				<% @happy_word.each do |word| %>
 				<%= word %>,
 				<%end%>
 			</div>
 			<div class="col-sm-6">
-				<h4>Negative Words</h4>
+				<h4>Negative Words (<%= @bad_word.size %>)</h4>
 				<% @bad_word.each do |word| %>
 				<%= word %>,
 				<% end %>
