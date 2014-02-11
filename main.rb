@@ -71,6 +71,7 @@ def calculate_nice_words (users)
 				# @happy_tweets.add(user["text"]) 
  				# happy_count += 1
 				your_happy_words.push(s)
+				@happy_tweets.push(user["text"])
 			end
 		end
 	end
@@ -78,6 +79,7 @@ def calculate_nice_words (users)
 end
 
 def calculate_bad_words (users)
+	@negative_tweets = Array.new
 	happy_word = Hash.new(0)
 	your_bad_words =[]
 	file_name = "badwords.txt"
@@ -94,6 +96,7 @@ def calculate_bad_words (users)
 			if happy_word[s] == 1 then
 				puts "WHAT?!?!?! #{s}"
 				your_bad_words.push(s)
+				@negative_tweets.push(user["text"])
 				# happy_count += 1
 			end
 		end
