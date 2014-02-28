@@ -1,10 +1,9 @@
 require 'rubygems'
-
 require 'oauth'
 require 'json'
-#require 'twitter'
+require 'twitter'
 require 'sinatra'
-
+set :server, 'webrick'
 
 class Word
    def initialize(word, tweet)
@@ -21,50 +20,28 @@ class Word
    end
 end
 
-def method_name (userName)	
-	consumer_key = OAuth::Consumer.new(
-    	"laBnLMwlztPiVVMkInoNPQ",
-    	"eknfQt4s1oqUToGnvGxUfdeSAm4ELWdqkNLcPQ02jg")
-	access_token = OAuth::Token.new(
-    	"364668892-xtPlJPHcWPSbaSS6AUMo0UkkkHKCA06lK6xuxaxj",
-    	"YLcPvyhtdg9S8R9rNKBy7MICQXkVnb1eniPS3OixfZQfr")
+def method_name(userName)
+
+	client = Twitter::REST::Client.new do |config|
+	  config.consumer_key        = "laBnLMwlztPiVVMkInoNPQ"
+	  config.consumer_secret     = "eknfQt4s1oqUToGnvGxUfdeSAm4ELWdqkNLcPQ02jg"
+	  config.access_token        = "364668892-xtPlJPHcWPSbaSS6AUMo0UkkkHKCA06lK6xuxaxj"
+	  config.access_token_secret = "YLcPvyhtdg9S8R9rNKBy7MICQXkVnb1eniPS3OixfZQfr"
+	end
+
+	puts "userName: ","#{userName}"
+	# puts "latest follower", client.friends.first.user_name
+	users = client.user_timeline("#{userName}")
 	
-	# Now you will fetch /1.1/statuses/user_timeline.json,
-	# returns a list of public Tweets from the specified
-	# account.
-	baseurl = "https://api.twitter.com"
-	path    = "/1.1/statuses/user_timeline.json"
-	query   = URI.encode_www_form(
-	    "screen_name" => "#{userName}",
-	    "count" => 5000,)
-
-	address = URI("#{baseurl}#{path}?#{query}")
-	request = Net::HTTP::Get.new address.request_uri
-
-	# Set up Net::HTTP to use SSL, which is required by Twitter.
-	http = Net::HTTP.new address.host, address.port
-	http.use_ssl = true
-	http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-
-	# Issue the request.
-	request.oauth! http, consumer_key, access_token
-	http.start
-	response = http.request request
-
-	# Parse and print the Tweet if the response code was 200
-	following = []
-	users = nil
-	if response.code == '200' then
-	    users = JSON.parse(response.body)
-	end 
-	users
 end
 
+=begin
 def print_tweet(users)
  users.each do |user| 
     	puts user["text"]
     end
 end
+=end
 
 def calculate_nice_words (users)
 	happy_word = Hash.new(0)

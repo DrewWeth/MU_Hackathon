@@ -29,8 +29,7 @@
 				<div class="col-sm-12">
 					<h4>Positive Words (<%= @happy_word.size %>)</h4>
 					<% @happy_word.each do |wordObj| %>
-						<%= wordObj.getWord() %>, <div class="label label-info"><%= wordObj.getTweet() %><br>
-						</div>
+						<%= wordObj.getWord() %>, <div class="label label-info"> <%= wordObj.getTweet() %> <br></div>
 					<%end%>
 				</div>
 			</div>
